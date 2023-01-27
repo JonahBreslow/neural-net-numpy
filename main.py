@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     ys = [1.0, -1.0, -1.0, 1.0]
 
-    for k in range(120):
+    for k in range(500):
         # forward pass
         y_pred = [model(x) for x in xs]
         loss = sum((y_out - y_gt)**2 for y_gt, y_out in zip(ys, y_pred))
@@ -22,8 +22,10 @@ if __name__ == "__main__":
         loss.backward()
         
         # update
-        for p in n.parameters():
+        for p in model.parameters():
             p.data += -0.03 * p.grad
         
-        if k % 10 == 0:
+        if k % 100 == 0:
             print(k, loss.data)
+
+    print(y_pred)
